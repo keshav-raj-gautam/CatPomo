@@ -13,21 +13,24 @@ jobs:
         name: Docker
         steps:
             - name: Code Checkout
-              uses: actions/Checkout@v6     
+              uses: actions/Checkout@v6    
               
-            - name: Build image
-              run: docker build --tag cat-pomo:v1 .
+            - name: check dorectory
+              run: pwd && ls  
+              
+            # - name: Build image
+            #   run: docker build --tag cat-pomo:v1 .
 
-            - name: Configure AWS Credentials
-              uses: aws-actions/configure-aws-credentials@v2
-              with:
-                role-to-assume: ${{vars.AWS_ROLE}}
-                aws-region: ap-south-1
+            # - name: Configure AWS Credentials
+            #   uses: aws-actions/configure-aws-credentials@v2
+            #   with:
+            #     role-to-assume: ${{vars.AWS_ROLE}}
+            #     aws-region: ap-south-1
 
-            - name: Push to ECR
-              id: ecr
-              uses: jwalton/gh-ecr-push@v2
-              with:
-                region: ap-south-1
-                image: cat-pomo:v1  
+            # - name: Push to ECR
+            #   id: ecr
+            #   uses: jwalton/gh-ecr-push@v2
+            #   with:
+            #     region: ap-south-1
+            #     image: cat-pomo:v1  
         
