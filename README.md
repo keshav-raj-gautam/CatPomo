@@ -1,4 +1,4 @@
-# 🐱 CatPomo — Microservices Pomodoro App
+#  CatPomo — Microservices Pomodoro App
 
 A cozy study companion with animated cats, real PostgreSQL storage, leaderboards, and analytics.
 
@@ -33,7 +33,7 @@ catpomo-v2/
 
 ---
 
-## 🚀 Quick Start (Docker)
+##  Quick Start (Docker)
 
 ```bash
 # 1. Clone / unzip project
@@ -135,14 +135,14 @@ VITE_API_URL=http://localhost:4000
 ---
 
 ## Features
-- 🐱 Animated cats (idle / studying / sleeping / happy)
-- ⏱️ Pomodoro timer — focus, short break, long break
-- 📊 Analytics — weekly bar chart, 90-day heatmap, donut
-- 🏆 Real leaderboard from PostgreSQL — no dummy data
-- 🧩 Sudoku break mode
-- 📝 Todos synced to DB
-- 🎀 Cat accessories unlocked by session count
-- 🌙 Dark / light mode
-- 💾 All data persists in PostgreSQL
-- 👤 Name-based onboarding (no passwords needed)
-- 🐳 One-command Docker deployment
+-  Animated cats (idle / studying / sleeping / happy)
+-  Pomodoro timer — focus, short break, long break
+-  Analytics — weekly bar chart, 90-day heatmap, donut
+-  Real leaderboard from PostgreSQL — no dummy data
+-  Sudoku break mode
+-  Todos synced to DB
+-  Cat accessories unlocked by session count
+-  Dark / light mode
+-  All data persists in PostgreSQL
+-  Name-based onboarding (no passwords needed)
+-  One-command Docker deployment
