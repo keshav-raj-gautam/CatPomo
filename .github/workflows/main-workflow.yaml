@@ -40,7 +40,7 @@ jobs:
                 region: ap-south-1
                 image: cat-pomo-backend:v1  
 
-            - name: Push to ECR
+            - name: Push to ECR 
               id: frontend-ecr
               uses: jwalton/gh-ecr-push@v2
               with:
