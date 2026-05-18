@@ -1,6 +1,6 @@
-Name: Deployment Workflow
+name: Deployment Workflow
 on:
-    Push:
+    push:
         branches:
             - main
             - 'feature/*'
