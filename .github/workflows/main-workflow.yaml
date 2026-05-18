@@ -9,6 +9,9 @@ on:
 
 jobs:
     Docker:
+        permissions:
+           id-token: write
+           contents: read
         runs-on: ubuntu-latest
         name: Docker
         steps:
