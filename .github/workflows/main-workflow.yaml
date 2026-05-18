@@ -16,7 +16,7 @@ jobs:
               uses: actions/Checkout@v6     
               
             - name: Build image
-              run: docker build --tag CatPomo:v1
+              run: docker build --tag CatPomo:v1 .
 
             - name: Configure AWS Credentials
               uses: aws-actions/configure-aws-credentials@v2
