@@ -29,5 +29,5 @@ jobs:
               uses: jwalton/gh-ecr-push@v2
               with:
                 region: ap-south-1
-                image: CatPomo:v1  
+                image: cat-pomo:v1  
         
