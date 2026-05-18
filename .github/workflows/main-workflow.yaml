@@ -15,22 +15,32 @@ jobs:
             - name: Code Checkout
               uses: actions/Checkout@v6    
               
-            - name: check dorectory
+            - name: check directory
               run: pwd && ls  
               
-            # - name: Build image
-            #   run: docker build --tag cat-pomo:v1 .
+            - name: Build backend image
+              run: docker build --tag cat-pomo-backend:v1 ./backend/
 
-            # - name: Configure AWS Credentials
-            #   uses: aws-actions/configure-aws-credentials@v2
-            #   with:
-            #     role-to-assume: ${{vars.AWS_ROLE}}
-            #     aws-region: ap-south-1
+            - name: Build frontend image
+              run: docker build --tag cat-pomo-frontend:v1 ./frontend/  
 
-            # - name: Push to ECR
-            #   id: ecr
-            #   uses: jwalton/gh-ecr-push@v2
-            #   with:
-            #     region: ap-south-1
-            #     image: cat-pomo:v1  
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v2
+              with:
+                role-to-assume: ${{vars.AWS_ROLE}}
+                aws-region: ap-south-1
+
+            - name: Push to ECR
+              id: backend-ecr
+              uses: jwalton/gh-ecr-push@v2
+              with:
+                region: ap-south-1
+                image: cat-pomo-backend:v1  
+
+            - name: Push to ECR
+              id: frontend-ecr
+              uses: jwalton/gh-ecr-push@v2
+              with:
+                region: ap-south-1
+                image: cat-pomo-frontend:v1      
         
