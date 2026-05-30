@@ -1,9 +1,9 @@
 name: Deployment Workflow
 on:
-    push:
-        branches:
-            - main
-            - 'feature/*'
+    # push:
+    #     branches:
+    #         - main
+    #         - 'feature/*'
 
     workflow_dispatch: 
 
@@ -27,23 +27,39 @@ jobs:
             - name: Build frontend image
               run: docker build --tag cat-pomo-frontend:v1 ./frontend/  
 
-            - name: Configure AWS Credentials
-              uses: aws-actions/configure-aws-credentials@v2
-              with:
-                role-to-assume: ${{vars.AWS_ROLE}}
-                aws-region: ap-south-1
+            # - name: Configure AWS Credentials
+            #   uses: aws-actions/configure-aws-credentials@v2
+            #   with:
+            #     role-to-assume: ${{vars.AWS_ROLE}}
+            #     aws-region: ap-south-1
 
-            - name: Push to ECR
-              id: backend-ecr
-              uses: jwalton/gh-ecr-push@v2
-              with:
-                region: ap-south-1
-                image: cat-pomo-backend:v1  
+            # - name: Push to ECR
+            #   id: backend-ecr
+            #   uses: jwalton/gh-ecr-push@v2
+            #   with:
+            #     region: ap-south-1
+            #     image: cat-pomo-backend:v1  
 
-            - name: Push to ECR 
-              id: frontend-ecr
-              uses: jwalton/gh-ecr-push@v2
+            # - name: Push to ECR 
+            #   id: frontend-ecr
+            #   uses: jwalton/gh-ecr-push@v2
+            #   with:
+            #     region: ap-south-1
+            #     image: cat-pomo-frontend:v1      
+
+            # 
+            - name: Docker login
+              uses: docker/login-action@v4
               with:
-                region: ap-south-1
-                image: cat-pomo-frontend:v1      
+                username: ${{vars.DOCKERHUB_USERNAME}}
+                password: ${{secrets.DOCKERHUB_PASSWORD}}
+
+            - name: Push Backend image to DockerHub 
+              uses: docker/build-push-action@v7
+              with: 
+                push: true
+                context: .
+                tags: |
+                    ${{vars.DOCKERHUB_USERNAME}}/CatPomo:${{github.sha}}  
+                    dockerhub.io/${{github.repository_owner}}/CatPomo:${{github.sha}}
         
