@@ -28,39 +28,59 @@ jobs:
             - name: Build frontend image
               run: docker build --tag cat-pomo-frontend:v1 ./frontend/  
 
-            # - name: Configure AWS Credentials
-            #   uses: aws-actions/configure-aws-credentials@v2
-            #   with:
-            #     role-to-assume: ${{vars.AWS_ROLE}}
-            #     aws-region: ap-south-1
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v2
+              with:
+                role-to-assume: ${{vars.AWS_ROLE}}
+                aws-region: ap-south-1
 
-            # - name: Push to ECR
-            #   id: backend-ecr
-            #   uses: jwalton/gh-ecr-push@v2
-            #   with:
-            #     region: ap-south-1
-            #     image: cat-pomo-backend:v1  
+            - name: Push to ECR
+              id: backend-ecr
+              uses: jwalton/gh-ecr-push@v2
+              with:
+                region: ap-south-1
+                image: cat-pomo-backend:v1  
 
-            # - name: Push to ECR 
-            #   id: frontend-ecr
-            #   uses: jwalton/gh-ecr-push@v2
-            #   with:
-            #     region: ap-south-1
-            #     image: cat-pomo-frontend:v1      
+            - name: Push to ECR 
+              id: frontend-ecr
+              uses: jwalton/gh-ecr-push@v2
+              with:
+                region: ap-south-1
+                image: cat-pomo-frontend:v1      
 
             # 
-            - name: Docker login
-              uses: docker/login-action@v4
-              with:
-                username: ${{vars.DOCKERHUB_USERNAME}}
-                password: ${{secrets.DOCKERHUB_PASSWORD}}
+    #         - name: Docker login
+    #           uses: docker/login-action@v4
+    #           with:
+    #             username: ${{secrets.DOCKERHUB_USERNAME}}
+    #             password: ${{secrets.DOCKERHUB_PASSWORD}}
 
-            - name: Push Backend image to DockerHub 
-              uses: docker/build-push-action@v7
-              with: 
-                push: true
-                context: .
-                tags: |
-                    ${{vars.DOCKERHUB_USERNAME}}/CatPomo:${{github.sha}}  
-                    dockerhub.io/${{github.repository_owner}}/CatPomo:${{github.sha}}
+    #         - name: Push Backend image to DockerHub 
+    #           uses: docker/build-push-action@v7
+    #           with: 
+    #             push: true
+    #             context: ./backend/
+    #             tags: |
+    #                 ${{vars.DOCKERHUB_USERNAME}}/CatPomo-backend:${{github.sha}}  
+    #                 dockerhub.io/${{github.repository_owner}}/CatPomo-backend:${{github.sha}}
+
+    #         - name: Push Frontend image to DockerHub 
+    #           uses: docker/build-push-action@v7
+    #           with: 
+    #             push: true
+    #             context: ./frontend/
+    #             tags: |
+    #                 ${{vars.DOCKERHUB_USERNAME}}/CatPomo-frontend:${{github.sha}}  
+    #                 dockerhub.io/${{github.repository_owner}}/CatPomo-frontend:${{github.sha}}        
+
+
+    # dev-deploy:
+    # runs-on: ubuntu-latest
+    # name: Dev Deployment
+    # steps:
+    #    - name: Code Checkout
+    #      uses: actions/Checkout@v6 
+
+    #    - name: SSH into VM   
+                         
         
