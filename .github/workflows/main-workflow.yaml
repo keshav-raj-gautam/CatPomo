@@ -1,11 +1,12 @@
 name: Deployment Workflow
 on:
+      workflow_dispatch: 
     # push:
     #     branches:
     #         - main
     #         - 'feature/*'
 
-    workflow_dispatch: 
+    
 
 jobs:
     Docker:
